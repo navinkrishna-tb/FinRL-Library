@@ -33,7 +33,7 @@ def BaselineStats(baseline_ticker = '^DJI',
                                  positions=None, transactions=None, turnover_denom="AGB")
     print(perf_stats_all)
     return perf_stats_all
-
+'''
 def BackTestPlot(account_value, 
                  baseline_start = config.START_TRADE_DATE, 
                  baseline_end = config.END_DATE, 
@@ -52,7 +52,7 @@ def BackTestPlot(account_value,
 
     with pyfolio.plotting.plotting_context(font_scale=1.1):
         pyfolio.create_full_tear_sheet(returns = DRL_strat,
-                                       benchmark_rets=dow_strat, set_context=False)
+                                       benchmark_rets=dow_strat, set_context=False)'''
 
 
 def backtest_strat(df):
@@ -84,7 +84,7 @@ def get_daily_return(df):
     print("sharpe ratio: ", sharpe)    
     return df
 
-def BackTestPlot_custom(account_value, data):
+def BackTestPlot(account_value, data):
 
     df = account_value.copy()
     df = get_daily_return(df)
