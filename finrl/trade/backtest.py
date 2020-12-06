@@ -83,3 +83,24 @@ def get_daily_return(df):
     print("annual return: ", annual_return)
     print("sharpe ratio: ", sharpe)    
     return df
+
+def BackTestPlot_custom(account_value, data):
+
+    df = account_value.copy()
+    df = get_daily_return(df)
+
+    dji, dow_strat = baseline_strat_custom(data)
+    df['date'] = dji['date']
+    df=df.dropna()
+    
+    DRL_strat = backtest_strat(df)
+
+    with pyfolio.plotting.plotting_context(font_scale=1.1):
+        pyfolio.create_full_tear_sheet(returns = DRL_strat,
+                                       benchmark_rets=dow_strat, set_context=False)
+        
+def baseline_strat_custom(df):
+    dji = df.copy()
+    dji['daily_return']=dji['close'].pct_change(1)
+    dow_strat = backtest_strat(dji)
+    return dji, dow_strat
